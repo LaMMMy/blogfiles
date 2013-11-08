@@ -1,6 +1,4 @@
-<!-- Title:"BizTalk 2010 to 2013 - Missing assembly Microsoft.BizTalk.Interop.SSOClient",
-     PublishedOn:"2013-11-08 15:09", 
-     Intro:"After upgrading to BizTalk 2013 from BizTalk 2010 the Microsoft.BizTalk.Interop.SSOClient was not found."-->
+<!-- Title:"BizTalk 2010 to 2013 - Missing assembly Microsoft.BizTalk.Interop.SSOClient",PublishedOn:"2013-11-08 15:09",Intro:"After upgrading to BizTalk 2013 from BizTalk 2010 the Microsoft.BizTalk.Interop.SSOClient was not found."-->
 	 
 BizTalk 2013 - Enterprise SSO assembly missing after upgrade
 ============================================================
