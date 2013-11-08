@@ -1,10 +1,4 @@
-<!-- {Title:"BizTalk 2010 to 2013 - Missing assembly Microsoft.BizTalk.Interop.SSOClient",PublishedOn:"2013-11-08 15:09",Intro:"After upgrading to BizTalk 2013 from BizTalk 2010 the Microsoft.BizTalk.Interop.SSOClient was not found."} -->
-	 
-BizTalk 2013 - Enterprise SSO assembly missing after upgrade
-============================================================
-
-Could not load file or assembly Could not load file or assembly Microsoft.BizTalk.Interop.SSOClient
----------------------------------------------------------------------------------------------------
+<!-- {Title:"BizTalk Upgrade to 2013 - Missing assembly SSOClient",PublishedOn:"2013-11-08 15:09",Intro:"After upgrading to BizTalk 2013 from BizTalk 2010 the SSOClient assembly was not found."} -->
 
 After trying to upgrade a BizTalk 2010 installation to 2013, the first thing I went to do is test the 
 WCF service that is attached to my main Receive Port. I was presented with a strange error in the Event Log
