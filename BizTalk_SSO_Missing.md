@@ -25,7 +25,7 @@ Sure enough it was reporting back as version 5.xxx
 
 So I went back to the BizTalk installation media and performed a Modify on the installation and sure enough, under "Additional Software" the "Enterprise Single Sign-On" checkboxes were unchecked. 
 
-![ESSOUnchecked](/images/ESSO_Modify.jpg "SSO_Modify")
+![ESSOUnchecked](/img/ESSO_Modify.jpg "SSO_Modify")
 
 So I completed the installation and checked for the error again...no change.
 
