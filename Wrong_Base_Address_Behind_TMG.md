@@ -8,7 +8,7 @@ That was until today, when one of the clients was reporting an SSL error when tr
 
 >ERROR: Error invoking web service [ClientTransportException: HTTP transport error: javax.net.ssl.SSLHandshakeException: java.security.cert.CertificateException: No subject alternative DNS name matching <myinternalservername.mydomain.com> found.]
 
-Two things lead to this happening.
+Two things lead to this happening as follows:
 
 1. The client is using a Mirth service to call our service
 2. The client had recently cached a version of our WCF's wsdl (post-move to behind the TMG)
