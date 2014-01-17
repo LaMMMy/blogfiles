@@ -4,15 +4,14 @@ Wow, where does the time go? I'm still writing 2013 on all my Dogecoin trans...n
 
 But honestly, how is it over half-way through January and I haven't written anything at all? Well, mostly it's because I've been busy trying to figure out to get client certificates to work with our BizTalk services. This was something that, all along, we just assumed would be a "flick-a-switch" type implementation. You'd think after so many disappointments, I'd have learned by now, there is no such thing in the world of BizTalk.
 
-So, at first I assumed it would all be handled by IIS and BizTalk would just chug along in the background. This was in part due to my naivety with BizTalk and even more than naive level of understanding of SSL and certificates in general (I mean looking back, did I really expect some kind of magically certificate sender to step-in and pass 
+So, at first I assumed it would all be handled by IIS and BizTalk would just chug along in the background. This was in part due to my naivety with BizTalk and my more-than-naive level of understanding of SSL and certificates in general (I mean looking back, did I really expect some kind of magically certificate sender to step-in and pass 
 along the cert?)
 
-So anyway, enough rambling
 
 # The Problem #
 **TransportWithMessageCredential:** Now, I'm not saying there is a problem with this Security Mode, but from the start, my colleagues and I **both** saw it and instantly assumed:
  
-> oh, that must mean you can just provide both, for now let's just use the message credentials part until we get the client certs issued.
+> oh, that must mean you can just provide both transport(client cert) and message security on this single dialog, yay! For now let's just use the message credentials part until we get the client certs issued.
 
 So with that being said, the biggest problem was the fact that I lacked knowledge, but really, take a look at this dialog box, with all it's options I swear it was TRYING to trick me:
 
@@ -22,19 +21,21 @@ You have Message security, Client Certificate, User Name credentials, it's all t
 
 ![MessageProps](/blog/img/WCF_BasicHttp_message.jpg "Message")
 
-It greys out the cert related things, and just leaves message related credentials. 
+It greys out the cert related things, and just leaves message related credentials. Simple, just enter your username and password which the WCF is expecting and Bob's your uncle...client certs must be even easier! 
 
-So now, we finally had our test client certs, I got the IIS server set up to trust all the right issuers, got the IIS Server cert setup, checked "Require" on the Client Certificates section in IIS configuration. Then, I opened up our BizTalk solution to the same WCF-BasicHttp properties page again and switched to TransportWithMessageCredential, thinking all I would have to do is supply a client cert...wrong:
+So now, we finally had our test client certs, I got the IIS server set up to trust all the right issuers, got the IIS Server cert setup, checked "Require" on the Client Certificates section in IIS configuration. I could reach the mex endpoint that's put up by the WCF service in a browser and choose the client cert from the service on which our BizTalk Send Port resides.
+
+Then, I opened up our BizTalk solution to the same WCF-BasicHttp properties page again and switched to TransportWithMessageCredential, thinking all I would have to do is supply a client cert using the that handy looking browse button...Wrong!
 
 ![TransMessageProps](/blog/img/WCF_BasicHttp_transmessage.jpg "TransMessage")
 
-It's hard to tell, but I did change the security mode in that screenshot...but nothing else changed. So basically you can't supply a cert here...
+It's hard to tell, but I did change the security mode in the screenshot above...but nothing else changed. So basically you can't supply a cert here, the handy dandy browse button turns out to be only for when you choose Transport security with a "Transport client credential type:" of Certificate.
 
 # The Solution #
 
-Now that I can start to understand what is actually going on in my situation, it makes more sense why the security page does not allow an SSL client cert AND message credentials. It's because this particular tab applies only to message security. The *Transport* part of *TransportWithMessageCredential* is just saying, there will be Transport-Layer security of some sort, but it's not being handled by BizTalk, however, BizTalk will be expecting it. This tab has nothing to do with the HTTP/IIS layer of security.
+Now that I can start to understand what is actually going on in my situation, it makes a bit more sense why the security page does not allow an SSL client cert AND message credentials. It's because this particular tab applies only to message security. The *Transport* part of *TransportWithMessageCredential* is just saying, there will be Transport-Layer security of some sort, but it's not being handled by BizTalk, however, BizTalk will be expecting it. This tab has nothing to do with the HTTP/IIS layer of security.
 
-You want to change those, you need to edit the identity of the endpoint. That's on the General tab. Duh.
+You want to change the actual Transport-Layer/HTTP endpoint settings, you need to edit the identity of the endpoint. That's on the General tab. Duh.
 
 So, to make the BizTalk WCF-BasicHttp adapter send port attach a client cert to the HTTP request, you go to:
 
@@ -44,13 +45,13 @@ That opens up the following dialog:
 
 ![endpoint_ID](/blog/img/endpoint_ID.jpg "endpoint_ID")
 
-**(General) Section:** This is the section that deals with Service you are trying to send to and it's identity
+**(General) Section:** This is the section that deals with Service you are trying to send to and it's identity, or what is the identity you are expecting this endpoint to present? You can say you're expecting a certain DNS, Service Principle Name or even Server SSL Certificate.
 
-**Certificate Reference:** This is the section that allows you to input the client certificate
+**Certificate Reference:** This is the section that allows you to input the client certificate. Notice I choose to find the certificate from the local machine store by thumbprint (which is a hex value you can get by viewing the details of a client cert). You can choose any of the [x509FindType enumeration values](http://msdn.microsoft.com/en-us/library/system.security.cryptography.x509certificates.x509findtype(v=vs.110).aspx "x509FindType enumeration values").
 
 **NOTE:** if you fill out the Certificate Reference section, you also MUST fill out one of the textboxes in the (General) section, without it, the send port will fail the SSL/TLS security negotiation for the service's domain...even though the Address (URI) is specified in the Endpoint Address box on the *WCF-BasicHttp Transport Properties*. It seems that once you mess with the Endpoint Identity, you need to mess with it thoroughly. 
 
-Once that identity dialog is completed, you click OK and then you'll notice some extra text on the *WCF-BasicHttp Transport* Properties dialog:
+Once that identity dialog is completed, you click OK and then you'll notice some extra XML displayed on the *WCF-BasicHttp Transport* Properties dialog:
 
 ![endpoint_ID2](/blog/img/endpoint_ID2.jpg "endpoint_ID2")
 
