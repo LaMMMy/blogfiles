@@ -52,7 +52,7 @@ So, I hit up Google and everything came down to the same solution, you have to a
 
 Usually it looks like this and you have to choose (because usually you are running as an Administrator account):
 
-![adminsnapin](/blog/img/adminsnapin.jpg "certs snapin when admin")
+![adminsnap](/blog/img/adminsnap.jpg "certs snapin when admin")
 
 **If you get the dialog above, it probably means you're not running as the service account you chose**
 

@@ -82,7 +82,7 @@ For the most part, the configuration is nearly the same as for the Receive Port,
 7. After the extension element is add, expand `clientCredentials` and select `ClientCertificate`
 8. ![clientCred](/blog/img/clientCred.jpg "clientCred")
 9. In the right side pane is where you enter your parameters for finding the client cert in the store. As shown above I'm checking the "CurrentUser" and finding using the thumbprint of the cert (`FindByThumbprint` which is in the System.Security.Cryptography.X509Certificates.X509FindType [System.Security.Cryptography.X509Certificates.X509FindType enumeration](http://msdn.microsoft.com/en-us/library/system.security.cryptography.x509certificates.x509findtype(v=vs.110).aspx))...the thumbprint can be entered with or without spaces and it still works.
-10. The "CurrentUser" referenced in the step above is actually the service account under which your Send Port is running. So you have to add the certificate to that user's store [which is outlined here in more detail.](http://www.bensoniam.com/blog/BizTalk_Certs_Location)
+10. The "CurrentUser" referenced in the step above is actually the service account under which your Send Port is running. So you have to add the certificate to that user's store [which is outlined here in more detail.](http://www.bensoniam.com/blog/BizTalk_Certs_Locations)
 11. Now move on to the **Credentials Tab**. There is were you choose "Do not user Single Sign-On" and enter the credentials for the Soap Header.
 
 Once that is all done, and your certificates are all in place, everything should work and the 2 BizTalk applications should be able to talk to each other with 2-level authentication.
@@ -91,6 +91,6 @@ Once that is all done, and your certificates are all in place, everything should
 
 Before playing with Client Certificates (or any for that matter) and BizTalk, make sure you read up a little bit and prepare to be frustrated for the first run. Oh and remember -- the message-layer can't do everything.
 
-If you want to do this for a Non-BizTalk WCF service check out [my write up](http://bensoniam.com) on that for the details.
+If you want to do this for a Non-BizTalk WCF service check out [my write up](http://bensoniam.com/blog/WCF_2Layer_Auth) on that for the details.
 
 Please feel free to tweet @ me with any questions, critiques or comments.
