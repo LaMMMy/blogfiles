@@ -1,4 +1,4 @@
-<!-- {Title:"Setting up a WCF Service and Client to user 2-Layer Authentication (Client Certs and WS UserName Security",PublishedOn:"2014-01-30 15:09",Intro:"By default WCF doesn't allow client certs AND message level/SOAP authentication. Here's how to do it using customBindings"} -->
+<!-- {Title:"Setting up a WCF Service and Client to user 2-Layer Authentication (Client Certs and WS UserName Security)",PublishedOn:"2014-01-30 15:09",Intro:"By default WCF doesn't allow client certs AND message level/SOAP authentication. Here's how to do it using customBindings"} -->
 
 
 # Introduction #
