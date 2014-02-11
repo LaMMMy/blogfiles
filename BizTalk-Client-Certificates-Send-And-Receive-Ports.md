@@ -1,4 +1,4 @@
-<!-- {Title:"Configuring BizTalk WCF-BasicHttp Ports to use Client Certificates AND Message-Level Authentication",PublishedOn:"2014-01-17 15:09",Intro:"Wanting to add Transport-Level client certificate validation and Message-Level user authentication? Here's how."} -->
+<!-- {Title:"Configuring BizTalk Send and Receive Ports to use Client Certificates AND Message-Level Authentication",PublishedOn:"2014-01-17 15:09",Intro:"Wanting to add Transport-Level client certificate validation and Message-Level user authentication? Here's how."} -->
 
 **Jan 30, 2014: I've since updated the following to be correct**
 
