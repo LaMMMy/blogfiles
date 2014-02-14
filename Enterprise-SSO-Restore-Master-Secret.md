@@ -13,7 +13,7 @@ Luckily I did a quick google search and found the answer (also luckily we had ou
 To restore it, run the following on your Master Secret Server (usually whatever SQL Server the BizTalk Server databases reside):
 
 -      In a command prompt, goto C:\Program Files\Common Files\Enterprise Single Sign-On\ (this is the default location of the master secret backup if you don't store it elsewhere)
--     Enter "ssoConfig -restoresecret <ssobackupfile>.bak"
+-     Enter "ssoConfig -restoresecret `<myssobackupfile>`.bak"
 -     Enter the password that was set on BizTalk installation. (you're screwed without this)
 
 After that, palms a-sweatin', heart a-thumpin' I went back to the BizTalk runtime server and restarted the application that I had deployed and lo and behold, it started just fine.
