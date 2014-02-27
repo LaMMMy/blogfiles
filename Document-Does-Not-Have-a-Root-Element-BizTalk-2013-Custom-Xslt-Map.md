@@ -28,8 +28,10 @@ So, I did what it says, in my test app and it worked! However, I couldn't do so 
 
 # The Fix #
 
-The fix as it turns out was to stop being lazy basically. It came down to using a whole bunch of `[normalize-space(.)]` selectors around basically anything that selects text in the XSLT file. It's not at all ideal, but relatively easy and got me in the habit of doing it now.
+The fix as it turns out was to stop being lazy basically. Since we can't dig into BizTalk (we aren't using custom pipelines unfortunately) it came down to using a whole bunch of `[normalize-space(.)]` selectors around basically anything that selects text in the XSLT file. It's not at all ideal, but relatively easy and got me in the habit of doing it now.
 
 I know I also enabled the `legacy Whitespace behavior` in my Host --> Settings dialog box. The combination of these 2 things did the trick.
+
+If I get the chance to do this app over again, it will be done using custom pipelines, instead of orchestrations and I believe this will allow us to avoid this situation.
 
 If anyone else has better suggestions, please let me know via twitter.
