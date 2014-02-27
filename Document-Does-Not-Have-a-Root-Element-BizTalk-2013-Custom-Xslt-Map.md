@@ -1,4 +1,4 @@
-<!-- {Title:"BizTalk 2013 Map with Custom XSLT -- Document Does Not Have a Root Element",PublishedOn:"2014-01-30 15:09",Intro:"Upgrading from BizTalk 2010 to 2013 caused the maps that were using a custom XSLT to always result in a 'Document Does Not Have a Root Element' error and a blank transformed XML Document. When using the xsl:strip-space elements='*'"} -->
+<!-- {Title:"BizTalk 2013 Map with Custom XSLT -- Document Does Not Have a Root Element",PublishedOn:"2014-02-27 15:09",Intro:"Upgrading from BizTalk 2010 to 2013 caused the maps that were using a custom XSLT to always result in a 'Document Does Not Have a Root Element' error and a blank transformed XML Document. When using the xsl:strip-space elements='*'"} -->
 
 # Introduction #
 
